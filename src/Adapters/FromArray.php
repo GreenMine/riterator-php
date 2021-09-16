@@ -19,12 +19,12 @@ class FromArray extends DoubleEndedIterator {
         return $this->array_len;
     }
 
-    public function next_back() {
-        return $this->array[$this->i--] ?? throw new EndException();
-    }
-
     public function end() {
         $this->i = $this->array_len - 1;
+    }
+
+    public function next_back() {
+        return $this->array[$this->i--] ?? throw new EndException();
     }
 
     public function next() {

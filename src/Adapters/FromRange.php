@@ -2,14 +2,14 @@
 
 namespace RIterator\Adapters;
 
-use RIterator\Iterator;
+use RIterator\DoubleEndedIterator;
 use RIterator\EndException;
 
-class FromRange extends Iterator {
+class FromRange extends DoubleEndedIterator {
     private int $current;
 
     public function __construct(
-        int $start,
+        private int $start,
         private int $end,
         private int $step = 1
     ) {
@@ -18,7 +18,19 @@ class FromRange extends Iterator {
     }
 
     public function size_hint() {
-        return floor(($this->end - $this->current) / $this->step) + 1;
+        return (int)floor(($this->end - $this->start) / $this->step) + 1;
+    }
+
+    public function end() {
+        //$this->start + floor(($this->end - $this->start) / $this->step) * $this->step
+        $this->current = $this->start + ($this->size_hint() - 1) * $this->step;
+    }
+
+    public function next_back() {
+        $current = $this->current;
+        $this->current = $current - $this->step;
+
+        return $current > $this->start ? $current : throw new EndException();
     }
 
     public function next() {

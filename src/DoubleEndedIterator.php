@@ -12,7 +12,12 @@ abstract class DoubleEndedIterator extends Iterator {
     public abstract function next_back();
 
     public function end() {
-        exit('unreachable: need to think about it');
+        exit('Not implemented method end()');
+    }
+
+    public function last() {
+        $this->end();
+        return $this->next_back();
     }
 
     public function rev() : Reverse {
