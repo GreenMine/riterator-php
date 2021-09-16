@@ -1,6 +1,6 @@
 <?php
 
-namespace RIterator;
+namespace RIterator\Traits;
 
 
 use RIterator\Adapters\FromArray;
@@ -16,7 +16,7 @@ trait Adapter {
         return new FromRange($start, $end, $step);
     }
 
-    public static function split_str(string $str, string $separator) {
+    public static function split_str(string $str, string $separator) : SplitString {
         return new SplitString($str, $separator);
     }
 }

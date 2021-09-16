@@ -12,7 +12,7 @@ use RIterator\Methods\TakeWhile;
 use RIterator\Methods\Zip;
 
 abstract class Iterator {
-    use Adapter;
+    use Traits\Adapter;
 
     protected Iterator|null $iterator;
 
@@ -24,15 +24,13 @@ abstract class Iterator {
      * @return Iterator|mixed
      * @throws EndException
      */
-    public function next() {
-        return $this->iterator->next();
-    }
+    public abstract function next();
 
     public function size_hint() {
         return $this->iterator->size_hint();
     }
 
-    //EDITOR FUNCTIONS
+    //Produce iterator methods
     public function map(Closure $closure): Map {
         return new Map($this, $closure);
     }
@@ -61,7 +59,7 @@ abstract class Iterator {
         return new Enumerate($this);
     }
 
-    //EXECUTOR FUNCTIONS
+    //Consume iterator methods
     public function collect(): array {
         $result = array();
         try {
@@ -142,6 +140,14 @@ abstract class Iterator {
             return $this->next();
         } catch(EndException) {}
         return null;
+    }
+
+    public function last() {
+        $value = null;
+        try {
+            while(true) $value = $this->next();
+        } catch(EndException) {}
+        return $value;
     }
 
     public function print($delimiter = PHP_EOL): void {

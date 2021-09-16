@@ -3,9 +3,10 @@
 namespace RIterator\Adapters;
 
 use RIterator\Iterator;
+use RIterator\DoubleEndedIterator;
 use RIterator\EndException;
 
-class FromArray extends Iterator {
+class FromArray extends DoubleEndedIterator {
     private int $array_len;
     private int $i = 0;
 
@@ -16,6 +17,14 @@ class FromArray extends Iterator {
 
     public function size_hint() {
         return $this->array_len;
+    }
+
+    public function next_back() {
+        return $this->array[$this->i--] ?? throw new EndException();
+    }
+
+    public function end() {
+        $this->i = $this->array_len - 1;
     }
 
     public function next() {
