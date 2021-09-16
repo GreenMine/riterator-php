@@ -3,21 +3,19 @@
 
 namespace RIterator\Methods;
 
+
 use RIterator\Iterator;
+use RIterator\EndException;
 use Closure;
 
-class IteratorFilter extends Iterator {
+class TakeWhile extends Iterator {
     protected function __construct($iterator, private Closure $closure) {
         parent::__construct($iterator);
     }
 
-    public function size_hint() { return -1; }
-
     public function next() {
-        do {
-            $value = $this->iterator->next();
-        } while(!($this->closure)($value));
+        $value = $this->iterator->next();
 
-        return $value;
+        return ($this->closure)($value) ? $value : throw new EndException();
     }
 }

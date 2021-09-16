@@ -3,15 +3,13 @@
 namespace RIterator;
 
 use Closure;
-use Exception;
-use JetBrains\PhpStorm\Pure;
-use RIterator\Methods\IteratorChain;
-use RIterator\Methods\IteratorEnumerate;
-use RIterator\Methods\IteratorFilter;
-use RIterator\Methods\IteratorMap;
-use RIterator\Methods\IteratorTake;
-use RIterator\Methods\IteratorWhile;
-use RIterator\Methods\IteratorZip;
+use RIterator\Methods\Chain;
+use RIterator\Methods\Enumerate;
+use RIterator\Methods\Filter;
+use RIterator\Methods\Map;
+use RIterator\Methods\Take;
+use RIterator\Methods\TakeWhile;
+use RIterator\Methods\Zip;
 
 abstract class Iterator {
     protected Iterator|null $iterator;
@@ -33,32 +31,32 @@ abstract class Iterator {
     }
 
     //EDITOR FUNCTIONS
-    public function map(Closure $closure): IteratorMap {
-        return new IteratorMap($this, $closure);
+    public function map(Closure $closure): Map {
+        return new Map($this, $closure);
     }
 
-    public function filter(Closure $closure): IteratorFilter {
-        return new IteratorFilter($this, $closure);
+    public function filter(Closure $closure): Filter {
+        return new Filter($this, $closure);
     }
 
-    public function take_while(Closure $closure): IteratorWhile {
-        return new IteratorWhile($this, $closure);
+    public function take_while(Closure $closure): TakeWhile {
+        return new TakeWhile($this, $closure);
     }
 
-    public function take(int $n) : IteratorTake {
-        return new IteratorTake($this, $n);
+    public function take(int $n) : Take {
+        return new Take($this, $n);
     }
 
-    public function zip(Iterator $iterator): IteratorZip {
-        return new IteratorZip($this, $iterator);
+    public function zip(Iterator $iterator): Zip {
+        return new Zip($this, $iterator);
     }
 
-    public function chain(Iterator $iterator): IteratorChain {
-        return new IteratorChain($this, $iterator);
+    public function chain(Iterator $iterator): Chain {
+        return new Chain($this, $iterator);
     }
 
-    public function enumerate(): IteratorEnumerate {
-        return new IteratorEnumerate($this);
+    public function enumerate(): Enumerate {
+        return new Enumerate($this);
     }
 
     //EXECUTOR FUNCTIONS
@@ -151,5 +149,3 @@ abstract class Iterator {
         } catch(EndException) {}
     }
 }
-
-class EndException extends Exception {}

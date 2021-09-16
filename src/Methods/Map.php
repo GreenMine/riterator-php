@@ -5,7 +5,7 @@ namespace RIterator\Methods;
 use RIterator\Iterator;
 use Closure;
 
-class IteratorMap extends Iterator {
+class Map extends Iterator {
     protected function __construct($iterator, private Closure $closure) {
         parent::__construct($iterator);
     }

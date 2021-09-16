@@ -5,7 +5,7 @@ namespace RIterator\Methods;
 
 use RIterator\Iterator;
 
-class IteratorEnumerate extends Iterator {
+class Enumerate extends Iterator {
     private int $i = 0;
 
     public function next() {

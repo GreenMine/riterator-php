@@ -5,7 +5,7 @@ namespace RIterator\Methods;
 use RIterator\EndException;
 use RIterator\Iterator;
 
-class IteratorChain extends Iterator {
+class Chain extends Iterator {
     private Iterator|null $chained;
 
     protected function __construct(Iterator $iterator, Iterator $chained) {
