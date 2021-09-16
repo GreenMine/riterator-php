@@ -1,0 +1,20 @@
+{
+    "name": "xladomaz/riterator",
+    "description": "Rust-like iterators for PHP",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "RIterator\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ilya",
+            "email": "greenmine94@gmail.com"
+        }
+    ],
+    "version": "0.0.1",
+    "require": {
+        "php": ">=8.0"
+    }
+}
