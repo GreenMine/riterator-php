@@ -12,6 +12,8 @@ use RIterator\Methods\TakeWhile;
 use RIterator\Methods\Zip;
 
 abstract class Iterator {
+    use Adapter;
+
     protected Iterator|null $iterator;
 
     protected function __construct(Iterator $iterator = null) {
