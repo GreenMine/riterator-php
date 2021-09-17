@@ -7,7 +7,7 @@ use RIterator\Iterator;
 use RIterator\DoubleEndedIterator;
 use RIterator\EndException;
 
-class FromArray extends DoubleEndedIterator {
+class SequentialArray extends DoubleEndedIterator {
     private int $data_len;
     private int $i = 0;
 

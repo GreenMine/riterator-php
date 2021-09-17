@@ -4,14 +4,16 @@ namespace RIterator\Traits;
 
 
 use Exception;
-use RIterator\Adapters\FromArray;
+use RIterator\Adapters\AssociativeArray;
+use RIterator\Adapters\SequentialArray;
 use RIterator\Adapters\FromRange;
 use RIterator\Adapters\SplitString;
 use RIterator\Iterator;
 
 trait Adapter {
-    public static function from_array(array $array): FromArray {
-        return new FromArray($array);
+    //Maybe create special class for array
+    public static function from_array(array $array): Iterator {
+        return self::is_assoc($array) ? new AssociativeArray($array) : new SequentialArray($array);
     }
 
     public static function range($start, $end, $step = 1): FromRange {
@@ -30,6 +32,11 @@ trait Adapter {
     }
 
     public static function chars(string $str) {
-        return new FromArray($str);
+        return new SequentialArray($str);
+    }
+
+    private static function is_assoc(array $array) {
+        if (empty($array)) return false;
+        return array_keys($array) !== range(0, count($array) - 1);
     }
 }
