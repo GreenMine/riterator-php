@@ -6,6 +6,7 @@ use Closure;
 use RIterator\Methods\Chain;
 use RIterator\Methods\Enumerate;
 use RIterator\Methods\Filter;
+use RIterator\Methods\Flatten;
 use RIterator\Methods\Map;
 use RIterator\Methods\Take;
 use RIterator\Methods\TakeWhile;
@@ -57,6 +58,10 @@ abstract class Iterator {
 
     public function enumerate(): Enumerate {
         return new Enumerate($this);
+    }
+
+    public function flatten(): Flatten {
+        return new Flatten($this);
     }
 
     //Consume iterator methods
