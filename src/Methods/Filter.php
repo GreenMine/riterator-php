@@ -3,15 +3,15 @@
 
 namespace RIterator\Methods;
 
-use RIterator\Iterator;
+use RIterator\IterableMethod;
 use Closure;
 
-class Filter extends Iterator {
-    protected function __construct($iterator, private Closure $closure) {
+class Filter extends IterableMethod {
+    public function __construct($iterator, private Closure $closure) {
         parent::__construct($iterator);
     }
 
-    public function size_hint() { return -1; }
+    public function size_hint(): int { return -1; }
 
     public function next() {
         do {

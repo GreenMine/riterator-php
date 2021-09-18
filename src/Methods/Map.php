@@ -2,11 +2,11 @@
 
 namespace RIterator\Methods;
 
-use RIterator\Iterator;
+use RIterator\IterableMethod;
 use Closure;
 
-class Map extends Iterator {
-    protected function __construct($iterator, private Closure $closure) {
+class Map extends IterableMethod {
+    public function __construct($iterator, private Closure $closure) {
         parent::__construct($iterator);
     }
 

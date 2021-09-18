@@ -13,7 +13,7 @@ use RIterator\Iterator;
 trait Adapter {
     //Maybe create special class for array
     public static function from_array(array $array): Iterator {
-        return self::is_assoc($array) ? new AssociativeArray($array) : new SequentialArray($array);
+        return new Iterator(self::is_assoc($array) ? new AssociativeArray($array) : new SequentialArray($array));
     }
 
     public static function range($start, $end, $step = 1): FromRange {

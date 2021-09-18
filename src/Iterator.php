@@ -3,44 +3,36 @@
 namespace RIterator;
 
 use Closure;
-use RIterator\Methods\Chain;
 use RIterator\Methods\Enumerate;
 use RIterator\Methods\Filter;
-use RIterator\Methods\Flatten;
 use RIterator\Methods\Map;
+/*use RIterator\Methods\Chain;
+use RIterator\Methods\Flatten;
 use RIterator\Methods\Take;
 use RIterator\Methods\TakeWhile;
-use RIterator\Methods\Zip;
+use RIterator\Methods\Zip;*/
 
-abstract class Iterator {
+class Iterator {
     use Traits\Adapter;
-
-    protected Iterator|null $iterator;
-
-    protected function __construct(Iterator $iterator = null) {
-        $this->iterator = $iterator;
-    }
-
-    /**
-     * @return Iterator|mixed
-     * @throws EndException
-     */
-    public abstract function next();
-
-    public function size_hint() {
-        return $this->iterator->size_hint();
-    }
+    public function __construct(protected IterableMethod $iter) {}
 
     //Produce iterator methods
-    public function map(Closure $closure): Map {
-        return new Map($this, $closure);
+    public function map(Closure $closure): Iterator {
+        $this->iter = new Map($this->iter, $closure);
+        return $this;
     }
 
-    public function filter(Closure $closure): Filter {
-        return new Filter($this, $closure);
+    public function filter(Closure $closure): Iterator {
+        $this->iter = new Filter($this->iter, $closure);
+        return $this;
     }
 
-    public function take_while(Closure $closure): TakeWhile {
+    public function enumerate(): Iterator {
+        $this->iter = new Enumerate($this->iter);
+        return $this;
+    }
+
+    /*public function take_while(Closure $closure): TakeWhile {
         return new TakeWhile($this, $closure);
     }
 
@@ -56,16 +48,24 @@ abstract class Iterator {
         return new Chain($this, $iterator);
     }
 
-    public function enumerate(): Enumerate {
-        return new Enumerate($this);
-    }
-
     public function flatten(): Flatten {
         return new Flatten($this);
-    }
+    }*/
 
     //Consume iterator methods
-    public function collect(): array {
+    public function count(): int {
+        $result = 0;
+        try {
+            while(true) {
+                $this->iter->next();
+                $result++;
+            }
+        } catch (EndException) {}
+
+        return $result;
+    }
+
+    /*public function collect(): array {
         $result = array();
         try {
             while(true) $result[] = $this->next();
@@ -85,18 +85,6 @@ abstract class Iterator {
         try {
             while(true) $result += $this->next();
         } catch(EndException) {}
-
-        return $result;
-    }
-
-    public function count(): int {
-        $result = 0;
-        try {
-            while(true) {
-                $this->next();
-                $result++;
-            }
-        } catch (EndException) {}
 
         return $result;
     }
@@ -160,5 +148,5 @@ abstract class Iterator {
             while(true)
                 echo $this->next() . $delimiter;
         } catch(EndException) {}
-    }
+    }*/
 }

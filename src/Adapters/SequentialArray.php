@@ -3,11 +3,11 @@
 namespace RIterator\Adapters;
 
 use Countable;
+use RIterator\IterableMethod;
 use RIterator\Iterator;
-use RIterator\DoubleEndedIterator;
 use RIterator\EndException;
 
-class SequentialArray extends DoubleEndedIterator {
+class SequentialArray extends IterableMethod {
     private int $data_len;
     private int $i = 0;
 
@@ -16,7 +16,7 @@ class SequentialArray extends DoubleEndedIterator {
         parent::__construct();
     }
 
-    public function size_hint() {
+    public function size_hint(): int {
         return $this->data_len;
     }
 

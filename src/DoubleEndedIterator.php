@@ -2,9 +2,9 @@
 
 namespace RIterator;
 
-use RIterator\Methods\Reverse;
+//use RIterator\Methods\Reverse;
 
-abstract class DoubleEndedIterator extends Iterator {
+/*abstract class DoubleEndedIterator extends Iterator {
     public function __construct(DoubleEndedIterator $iterator = null) {
         parent::__construct($iterator);
     }
@@ -23,4 +23,4 @@ abstract class DoubleEndedIterator extends Iterator {
     public function rev() : Reverse {
         return new Reverse($this);
     }
-}
+}*/
