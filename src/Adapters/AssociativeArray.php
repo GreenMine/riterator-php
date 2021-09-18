@@ -23,9 +23,11 @@ class AssociativeArray extends Iterator {
 
     public function next() {
         $current = $this->gen->current();
+        if($current === null) throw new EndException();
+
         $this->gen->next();
 
-        return $current ?? throw new EndException();
+        return $current;
     }
 
     private function array_to_gen(array $array) : Generator {
