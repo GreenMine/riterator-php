@@ -65,6 +65,15 @@ class Iterator {
         return $result;
     }
 
+    public function sum() {
+        $result = 0;
+        try {
+            while(true) $result += $this->iter->next();
+        } catch(EndException) {}
+
+        return $result;
+    }
+
     /*public function collect(): array {
         $result = array();
         try {
@@ -78,15 +87,6 @@ class Iterator {
         try {
             while(true) $closure($this->next());
         } catch(EndException) {}
-    }
-
-    public function sum() {
-        $result = 0;
-        try {
-            while(true) $result += $this->next();
-        } catch(EndException) {}
-
-        return $result;
     }
 
     public function any(Closure $closure): bool {
