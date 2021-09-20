@@ -15,21 +15,8 @@ use RIterator\Methods\Zip;
 abstract class Iterator {
     use Traits\Adapter;
 
-    protected Iterator|null $iterator;
-
-    protected function __construct(Iterator $iterator = null) {
-        $this->iterator = $iterator;
-    }
-
-    /**
-     * @return Iterator|mixed
-     * @throws EndException
-     */
     public abstract function next();
-
-    public function size_hint() {
-        return $this->iterator->size_hint();
-    }
+    public abstract function size_hint();
 
     //Produce iterator methods
     public function map(Closure $closure): Map {
@@ -80,7 +67,7 @@ abstract class Iterator {
         } catch(EndException) {}
     }
 
-    public function sum() {
+    public function sum(): int {
         $result = 0;
         try {
             while(true) $result += $this->next();
@@ -137,7 +124,7 @@ abstract class Iterator {
         return $result;
     }
 
-    public function nth(int $index) {
+    public function nth(int $index): mixed {
         try {
             //TODO: possible to optimize with skip functionality(if we doesn't have size-changing method in iterators)
             for($i = 0; $i < $index; $i++)
@@ -147,7 +134,7 @@ abstract class Iterator {
         return null;
     }
 
-    public function last() {
+    public function last(): mixed {
         $value = null;
         try {
             while(true) $value = $this->next();

@@ -7,7 +7,7 @@ namespace RIterator\Methods;
 use RIterator\DoubleEndedIterator;
 
 class Reverse extends DoubleEndedIterator {
-    public function __construct(DoubleEndedIterator $iterator) {
+    protected function __construct(DoubleEndedIterator $iterator) {
         $iterator->end();
         parent::__construct($iterator);
     }
@@ -18,5 +18,9 @@ class Reverse extends DoubleEndedIterator {
 
     public function next() {
         return $this->iterator->next_back();
+    }
+
+    public function end() {
+        exit("Something went wrong!\n");
     }
 }

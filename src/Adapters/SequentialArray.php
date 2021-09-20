@@ -4,16 +4,14 @@ namespace RIterator\Adapters;
 
 use Countable;
 use RIterator\Iterator;
-use RIterator\DoubleEndedIterator;
 use RIterator\EndException;
 
-class SequentialArray extends DoubleEndedIterator {
+class SequentialArray extends Iterator {
     private int $data_len;
     private int $i = 0;
 
     public function __construct(private Countable|string|array $data) {
         $this->data_len = is_string($data) ? strlen($data) : count($data);
-        parent::__construct();
     }
 
     public function size_hint() {

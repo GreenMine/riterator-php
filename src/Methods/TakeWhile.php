@@ -7,8 +7,9 @@ namespace RIterator\Methods;
 use RIterator\Iterator;
 use RIterator\EndException;
 use Closure;
+use RIterator\IteratorMethod;
 
-class TakeWhile extends Iterator {
+class TakeWhile extends IteratorMethod {
     protected function __construct($iterator, private Closure $closure) {
         parent::__construct($iterator);
     }

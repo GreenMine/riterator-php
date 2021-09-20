@@ -5,8 +5,9 @@ namespace RIterator\Methods;
 use Exception;
 use RIterator\EndException;
 use RIterator\Iterator;
+use RIterator\IteratorMethod;
 
-class Flatten extends Iterator {
+class Flatten extends IteratorMethod {
     private Iterator $current;
 
     protected function __construct(Iterator $iterator)

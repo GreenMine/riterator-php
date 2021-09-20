@@ -4,8 +4,9 @@ namespace RIterator\Methods;
 
 use RIterator\Iterator;
 use RIterator\EndException;
+use RIterator\IteratorMethod;
 
-class Take extends Iterator {
+class Take extends IteratorMethod {
     protected function __construct(Iterator $iterator, private int $n) {
         parent::__construct($iterator);
     }

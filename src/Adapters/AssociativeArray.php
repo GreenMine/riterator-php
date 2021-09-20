@@ -13,8 +13,6 @@ class AssociativeArray extends Iterator {
     public function __construct(array $data) {
         $this->gen = self::array_to_gen($data);
         $this->data_len = count($data);
-
-        parent::__construct();
     }
 
     public function size_hint() {

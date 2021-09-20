@@ -4,6 +4,7 @@ namespace RIterator\Adapters;
 
 use RIterator\DoubleEndedIterator;
 use RIterator\EndException;
+use RIterator\Iterator;
 
 class FromRange extends DoubleEndedIterator {
     private int $current;
@@ -14,7 +15,6 @@ class FromRange extends DoubleEndedIterator {
         private int $step = 1
     ) {
         $this->current = $start;
-        parent::__construct();
     }
 
     public function size_hint() {

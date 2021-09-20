@@ -4,18 +4,12 @@ namespace RIterator;
 
 use RIterator\Methods\Reverse;
 
-abstract class DoubleEndedIterator extends Iterator {
-    public function __construct(DoubleEndedIterator $iterator = null) {
-        parent::__construct($iterator);
-    }
+abstract class DoubleEndedIterator extends IteratorMethod {
 
     public abstract function next_back();
+    abstract public function end();
 
-    public function end() {
-        exit('Not implemented method end()');
-    }
-
-    public function last() {
+    public function last(): mixed {
         $this->end();
         return $this->next_back();
     }

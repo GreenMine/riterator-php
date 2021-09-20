@@ -5,6 +5,7 @@ namespace RIterator\Traits;
 
 use Exception;
 use RIterator\Adapters\AssociativeArray;
+use RIterator\Adapters\Repeat;
 use RIterator\Adapters\SequentialArray;
 use RIterator\Adapters\FromRange;
 use RIterator\Adapters\SplitString;
@@ -29,6 +30,10 @@ trait Adapter {
         else if(is_array($data)) return self::from_array($data);
 
         throw new Exception('Type ' . gettype($data) . ' can\'t be converted to Iterator!');
+    }
+
+    public static function repeat($value) : Iterator {
+        return new Repeat($value);
     }
 
     public static function chars(string $str) {

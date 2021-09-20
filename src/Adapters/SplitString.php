@@ -12,7 +12,10 @@ class SplitString extends Iterator {
         public string $separator
     ) {
         $this->tok = strtok($string, $this->separator);
-        parent::__construct();
+    }
+
+    public function size_hint() {
+        return -1;
     }
 
     public function next() {
