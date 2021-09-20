@@ -3,9 +3,11 @@
 namespace RIterator\Traits;
 
 
+use Closure;
 use Exception;
 use RIterator\Adapters\AssociativeArray;
 use RIterator\Adapters\Repeat;
+use RIterator\Adapters\RepeatWith;
 use RIterator\Adapters\SequentialArray;
 use RIterator\Adapters\FromRange;
 use RIterator\Adapters\SplitString;
@@ -34,6 +36,10 @@ trait Adapter {
 
     public static function repeat($value) : Iterator {
         return new Repeat($value);
+    }
+
+    public static function repeat_with(Closure $closure) {
+        return new RepeatWith($closure);
     }
 
     public static function chars(string $str) {

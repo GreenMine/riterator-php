@@ -14,6 +14,8 @@ class TakeWhile extends IteratorMethod {
         parent::__construct($iterator);
     }
 
+    public function size_hint() { return -1; }
+
     public function next() {
         $value = $this->iterator->next();
 

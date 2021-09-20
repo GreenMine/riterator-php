@@ -11,6 +11,10 @@ class Take extends IteratorMethod {
         parent::__construct($iterator);
     }
 
+    public function size_hint() {
+        return $this->n;
+    }
+
     public function next() {
         return $this->n-- > 0 ?
             $this->iterator->next() : throw new EndException();
